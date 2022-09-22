@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css'
+
+import PrivateRoute from "./routes/PrivateRoute";
+import Home from "./routes/Home";
+import UpdatePassword from "./routes/accounts/UpdatePassword";
+import Login from "./routes/accounts/login";
+import Register from "./routes/accounts/register";
+import Navbar from "./components/Navbar";
+import Template from "./routes/template";
+
+class App extends Component {
+    render() {
+        return (
+            <div style={{height: "100%", display: "flex", flexDirection: "column"}}>
+                <BrowserRouter>
+                    <Navbar />
+                    <Routes>
+                        <Route path="*" element={<PrivateRoute component={
+                            <Routes>
+                                {/* Paths here require login */}
+                                <Route path="/" element={<Home />} />
+                                <Route path="/template" element={<Template />} />
+                            </Routes>
+                        }/>} />
+                        {/* Paths here do not require login */}
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/updatepassword" element={<UpdatePassword />} />
+                    </Routes>
+                </BrowserRouter>
+            </div>
+        )
+    }
 }
 
 export default App;
