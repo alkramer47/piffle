@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
+import './App.css';
 
 import PrivateRoute from "./routes/PrivateRoute";
 import Home from "./routes/Home";
@@ -15,7 +15,7 @@ import Template from "./routes/template";
 class App extends Component {
     render() {
         return (
-            <div style={{height: "100%", display: "flex", flexDirection: "column"}}>
+            <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
                 <BrowserRouter>
                     <Navbar />
                     <Routes>
@@ -25,7 +25,7 @@ class App extends Component {
                                 <Route path="/" element={<Home />} />
                                 <Route path="/template" element={<Template />} />
                             </Routes>
-                        }/>} />
+                        } />} />
                         {/* Paths here do not require login */}
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
