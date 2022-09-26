@@ -29,7 +29,8 @@ function LoginForm({Login, error}){
                         <label htmlFor="password">Password:</label>
                         <input type="password" name="password" id="password"/>
                     </div>
-                    <input type="submit" value="LOGIN"/>
+                    <input type="submit" value="Login"/>
+                    <input type="submit" value="Sign up"/>
                 </div>
             </form>
       </div>
