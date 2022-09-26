@@ -9,6 +9,9 @@ const Navbar = () => {
     //if(isLoggedIn())
     if(true) { //TODO Build isLoggedIn
         options = [{
+            label: "Profile",
+            onClick: () => { navigate('/profile'); }
+        }, {
             label: "Update password",
             onClick: () => { navigate('/updatepassword'); }
         }, {
@@ -18,11 +21,14 @@ const Navbar = () => {
     }
     else {
         options = [{
-            label: "Login",
-            onClick: () => { navigate('/login'); }
+            label: "Profile",
+            onClick: () => { navigate('/profile'); }
         }, {
-            label: "Register",
-            onClick: () => { navigate('/register'); }
+            label: "Update password",
+            onClick: () => { navigate('/updatepassword'); }
+        }, {
+            label: "Logout",
+            onClick: () => { /*logout().catch((error)=>alert(error)); */navigate('/login'); /*TODO Build logout*/}
         }]
     }
 

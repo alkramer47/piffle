@@ -11,6 +11,7 @@ import Login from "./routes/accounts/login";
 import Register from "./routes/accounts/register";
 import Navbar from "./components/Navbar";
 import Template from "./routes/template";
+import Profile from './routes/accounts/profile';
 
 class App extends Component {
     render() {
@@ -23,6 +24,7 @@ class App extends Component {
                             <Routes>
                                 {/* Paths here require login */}
                                 <Route path="/" element={<Home />} />
+                                <Route path="/profile" element={<Profile />} />
                                 <Route path="/template" element={<Template />} />
                             </Routes>
                         }/>} />
