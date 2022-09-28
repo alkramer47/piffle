@@ -3,7 +3,10 @@ import React from 'react';
 class RegisterForm extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {name:'', password:''};
+      this.state = {
+        name: '', 
+        password: ''
+      };
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -12,6 +15,7 @@ class RegisterForm extends React.Component {
       const target = event.target;
       const value = target.value;
       const name = target.name; 
+      console.log(name, " ", value);
       this.setState({
         [name]: value    
       });
@@ -36,7 +40,7 @@ class RegisterForm extends React.Component {
             <input 
               placeholder='Name'
               type="text"
-              value={this.state.value} 
+              value={this.state.name} 
               onChange={this.handleChange} 
             />
           </div>
@@ -46,7 +50,7 @@ class RegisterForm extends React.Component {
             <input 
               placeholder='Password'
               type="text"
-              value={this.state.value} 
+              value={this.state.password} 
               onChange={this.handleChange}
             />
           </div>
