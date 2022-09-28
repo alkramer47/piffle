@@ -17,7 +17,7 @@ class RegisterForm extends React.Component {
       const name = target.name; 
       console.log(name, " ", value);
       this.setState({
-        [name]: value    
+        name: value
       });
     }
 
