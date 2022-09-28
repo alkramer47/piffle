@@ -1,5 +1,6 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
+import styles from "../component_styles/Conversations.module.css"
 
 class Conversations extends React.Component {
     constructor() {
@@ -165,26 +166,26 @@ class Conversations extends React.Component {
         return (
             <div style={{height: '100%', display: 'flex', overflow: "hidden"}}>
                 <Sidebar getConversations={this.getConversations} getSelected={this.getSelected} setSelected={this.setSelected}/>
-                <div className="convoWindow">
-                    <div className="convoHeader" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                <div className={styles.convo_window}>
+                    <div className={styles.convo_header} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                         {this.state.conversations[this.state.selectedConversation].recipient.username}
                     </div>
                     <div style={{overflowY: "auto", height: "100%"}}>
                         {this.state.conversations[this.state.selectedConversation].messages.map((message, index) => {
                             return (
-                                message.sender == this.state.conversations[this.state.selectedConversation].recipient.username ? 
-                                <div className="message receiver" key={index}>
+                                message.sender === this.state.conversations[this.state.selectedConversation].recipient.username ? 
+                                <div className={styles.message + ' ' + styles.receiver} key={index}>
                                     {message.text}
                                 </div>
                                 : 
-                                <div className="message sender" key={index}>
+                                <div className={styles.message + ' ' + styles.sender} key={index}>
                                     {message.text}
                                 </div>
                             )
                         })}
                     </div>
                     <div style={{width: "100%", padding: "5px"}}>
-                        <input className="messageEntry" placeholder="Enter a message" onSubmit={(res) => {console.log(res)}} />
+                        <input className={styles.message_entry} placeholder="Enter a message" onSubmit={(res) => {console.log(res)}} />
                     </div>
                 </div>
             </div>

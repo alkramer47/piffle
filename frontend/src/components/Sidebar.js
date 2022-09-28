@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import styles from '../component_styles/Sidebar.module.css';
 
 export default class Sidebar extends Component {
 
@@ -12,11 +13,11 @@ export default class Sidebar extends Component {
 		let selected = this.props.getSelected()
 
         return (
-            <div className="sidebar">
+            <div className={styles.sidebar}>
                 {conversations ? conversations.map((conv, index) => { 
                     return (
                         <div key={index}>
-                            <Button className="sidebar-item" onClick={() => this.handleConversationSelect(index)} 
+                            <Button className={styles.sidebar_item} onClick={() => this.handleConversationSelect(index)} 
                                 style={{
                                     backgroundColor: (index === selected ? "#a6a6a6" : "transparent")
                                 }}>
