@@ -7,11 +7,12 @@ import './App.css';
 import PrivateRoute from "./routes/PrivateRoute";
 import Home from "./routes/Home";
 import UpdatePassword from "./routes/accounts/UpdatePassword";
-import Login from "./routes/accounts/login";
+import Login from "./components/LoginForm";
 import Register from "./routes/accounts/register";
 import Navbar from "./components/Navbar";
 import Template from "./routes/template";
 import Profile from './routes/accounts/profile';
+import Conversations from './routes/Conversations';
 
 class App extends Component {
     render() {
@@ -25,6 +26,7 @@ class App extends Component {
                                 {/* Paths here require login */}
                                 <Route path="/" element={<Home />} />
                                 <Route path="/profile" element={<Profile />} />
+                                <Route path="/conversations" element={<Conversations />} />
                                 <Route path="/template" element={<Template />} />
                             </Routes>
                         } />} />
