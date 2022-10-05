@@ -37,6 +37,8 @@ form::after{
     background-image: linear-gradient(to bottom right, #00f7ff, #58008b);
 }
 
+
+
 form .form-inner{
     position: relative;
     display: block;
