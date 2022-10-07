@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import LoginForm from '../components/LoginForm';
-import '../routes/Home.css'
+import styles from '../component_styles/Home.module.css';
 
 const Home = () => {
     /* Test user to see successful login */
@@ -34,9 +34,9 @@ const Home = () => {
     }
 
     return (
-        <div className="Home">
+        <div className={styles.Home}>
             {(user.email != "") ? (
-                <div className="welcome">
+                <div className={styles.welcome}>
                     <h2>Welcome, <span>{user.name}</span></h2>
                     <button onClick={Logout}>Logout</button>
                 </div>
