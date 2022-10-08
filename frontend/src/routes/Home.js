@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import LoginForm from '../components/LoginForm';
 import styles from '../component_styles/Home.module.css';
-import { Navigate, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     /* Test user to see successful login */
