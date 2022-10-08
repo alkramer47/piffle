@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import LoginForm from '../components/LoginForm';
 import styles from '../component_styles/Home.module.css';
+import { Navigate, Route, useNavigate } from "react-router-dom";
 
 const Home = () => {
     /* Test user to see successful login */
@@ -8,6 +9,8 @@ const Home = () => {
         email: "admin@admin.com",
         password: "admin123"
     }
+
+    const navigate = useNavigate();
 
     const [user, setUser] = useState({name:"", email:""});
     const [error, setError] = useState([""]);
@@ -22,10 +25,16 @@ const Home = () => {
                name: details.name,
                email: details.email 
             });
+            navigate("/Conversations");
         } else {
             console.log("Incorrect Username and/or Password");
             setError("Incorrect Username and/or Password")
         }
+    }
+
+    const Register = () => {
+        console.log("REGISTERING");
+        navigate("/accounts/register");
     }
 
     const Logout = () => {
@@ -41,7 +50,7 @@ const Home = () => {
                     <button onClick={Logout} className={styles.submitButton}>Logout</button>
                 </div>
             ): (
-               <LoginForm Login={Login} error={error}/> 
+               <LoginForm Login={Login} Register={Register} error={error}/> 
             )}
         </div>
     );

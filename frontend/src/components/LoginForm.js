@@ -1,18 +1,26 @@
 import React, {useState} from 'react';
 import styles from '../component_styles/Home.module.css';
 
-function LoginForm({Login, error}){
+function LoginForm({Login, Register, error}){
     const[details, setDetails] = useState({name:"", email:"", password:""});
 
-    const submitHandler = e => {
+    /* Function to handle when Login button is clicked */
+    const loginHandler = e => {
         e.preventDefault();
-
+        console.log("Login Button Clicked");
         Login(details);
+    }
+
+    /* Function to handle when Register button is clicked */
+    const registerHandler = e => {
+        e.preventDefault();
+        console.log("Register Button Clicked");
+        Register();
     }
 
     return (
         <div>
-            <form onSubmit={submitHandler}>
+            <form>
                     <div className={styles.form_inner}>
                         <h2>Login</h2>
                             {(error != "") ? (<div className="error">{error}</div>) : ""}
@@ -28,8 +36,8 @@ function LoginForm({Login, error}){
                             <label htmlFor="password">Password:</label>
                             <input type="password" name="password" id="password" onChange={e => setDetails({...details, password: e.target.value})} value={details.password}/>
                         </div>
-                        <input type="submit" value="Login" className={styles.submitButton}/>
-                        <input type="submit" value="Sign up" className={styles.submitButton}/>
+                        <input type="submit" onClick={loginHandler} value="Login" className={styles.submitButton}/>
+                        <input type="submit" onClick={registerHandler} value="Sign up" className={styles.submitButton}/>
                 </div>
             </form>
         </div>
