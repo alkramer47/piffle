@@ -28,8 +28,8 @@ function LoginForm({Login, error}){
                             <label htmlFor="password">Password:</label>
                             <input type="password" name="password" id="password" onChange={e => setDetails({...details, password: e.target.value})} value={details.password}/>
                         </div>
-                        <input type="submit" value="Login"/>
-                        <input type="submit" value="Sign up"/>
+                        <input type="submit" value="Login" className={styles.submitButton}/>
+                        <input type="submit" value="Sign up" className={styles.submitButton}/>
                 </div>
             </form>
         </div>

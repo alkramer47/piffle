@@ -38,7 +38,7 @@ const Home = () => {
             {(user.email != "") ? (
                 <div className={styles.welcome}>
                     <h2>Welcome, <span>{user.name}</span></h2>
-                    <button onClick={Logout}>Logout</button>
+                    <button onClick={Logout} className={styles.submitButton}>Logout</button>
                 </div>
             ): (
                <LoginForm Login={Login} error={error}/> 
