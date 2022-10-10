@@ -1,5 +1,5 @@
 import React from 'react';
-import Puffle from '../assets/puffle.png';
+import Puffle from '../assets/puffle_navbar.png';
 import { useNavigate } from 'react-router-dom';
 import NavBarDropDown from './NavBarDropDown';
 const Navbar = () => {
@@ -16,7 +16,7 @@ const Navbar = () => {
             onClick: () => { navigate('/updatepassword'); }
         }, {
             label: "Logout",
-            onClick: () => { /*logout().catch((error)=>alert(error)); */navigate('/login'); /*TODO Build logout*/}
+            onClick: () => { /*logout().catch((error)=>alert(error)); */navigate('/'); /*TODO Build logout*/}
         }];
     }
     else {

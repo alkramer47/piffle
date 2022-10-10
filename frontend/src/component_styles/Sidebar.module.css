@@ -1,0 +1,23 @@
+/*
+Sidebar styling
+*/
+
+.sidebar {
+	background: #c4c4c4;
+	height: 100%;
+	width: 20%;
+	min-width: 180px;
+	padding: 10px;
+	overflow-y: auto;
+  }
+  
+  .sidebar_item {
+	width: 100%;
+	text-align: left;
+	color: black !important;
+	background-color: transparent;
+	border-color: transparent !important;
+	box-shadow: none !important;
+	padding: 0px;
+  }
+  

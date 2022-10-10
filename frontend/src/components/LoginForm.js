@@ -1,35 +1,43 @@
 import React, {useState} from 'react';
-import '../routes/Home.css';
+import styles from '../component_styles/Home.module.css';
 
-function LoginForm({Login, error}){
+function LoginForm({Login, Register, error}){
     const[details, setDetails] = useState({name:"", email:"", password:""});
 
-    const submitHandler = e => {
+    /* Function to handle when Login button is clicked */
+    const loginHandler = e => {
         e.preventDefault();
-
+        console.log("Login Button Clicked");
         Login(details);
+    }
+
+    /* Function to handle when Register button is clicked */
+    const registerHandler = e => {
+        e.preventDefault();
+        console.log("Register Button Clicked");
+        Register();
     }
 
     return (
         <div>
-            <form onSubmit={submitHandler}>
-                    <div className="form-inner">
+            <form>
+                    <div className={styles.form_inner}>
                         <h2>Login</h2>
                             {(error != "") ? (<div className="error">{error}</div>) : ""}
-                        <div className="form-group"> 
+                        <div className={styles.form_group}> 
                             <label htmlFor="name">Name:</label>
                             <input type="text" name="name" id="name" onChange={e => setDetails({...details, name: e.target.value})} value={details.name}/>
                         </div>
-                        <div className="form-group">
+                        <div className={styles.form_group}>
                             <label htmlFor="email">Email:</label>
                             <input type="email" name="email" id="email" onChange={e => setDetails({...details, email: e.target.value})} value={details.email}/>
                         </div>
-                        <div className="form-group">
+                        <div className={styles.form_group}>
                             <label htmlFor="password">Password:</label>
                             <input type="password" name="password" id="password" onChange={e => setDetails({...details, password: e.target.value})} value={details.password}/>
                         </div>
-                        <input type="submit" value="Login"/>
-                        <input type="submit" value="Sign up"/>
+                        <input type="submit" onClick={loginHandler} value="Login" className={styles.submitButton}/>
+                        <input type="submit" onClick={registerHandler} value="Sign up" className={styles.submitButton}/>
                 </div>
             </form>
         </div>
