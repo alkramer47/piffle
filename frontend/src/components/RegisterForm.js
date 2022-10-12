@@ -12,12 +12,8 @@ class RegisterForm extends React.Component {
     }
   
     handleChange(event) {    
-      const target = event.target;
-      const value = target.value;
-      const name = target.name; 
-      console.log(name, " ", value);
       this.setState({
-        name: value
+        [event.target.name]: event.target.value
       });
     }
 
@@ -40,6 +36,7 @@ class RegisterForm extends React.Component {
             <input 
               placeholder='Name'
               type="text"
+              name="name"
               value={this.state.name} 
               onChange={this.handleChange} 
             />
@@ -49,7 +46,8 @@ class RegisterForm extends React.Component {
             <br />
             <input 
               placeholder='Password'
-              type="text"
+              type="password"
+              name="password"
               value={this.state.password} 
               onChange={this.handleChange}
             />
