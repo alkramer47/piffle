@@ -1,17 +1,3 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-}
-
-input, button {
-    appearance: none;
-    background: none;
-    border: none;
-    outline: none;
-}
-
 .Home {
     height: 100vh;
     display: flex;
@@ -19,13 +5,13 @@ input, button {
     justify-content: center;
 }
 
-form{
+.login_form{
     display: block;
     position: relative;
     margin-bottom: 50%;
 }
 
-form::after{
+.login_form::after{
     content: '';
     display: block;
     position: absolute;
@@ -37,7 +23,7 @@ form::after{
     background-image: linear-gradient(to bottom right, #00f7ff, #58008b);
 }
 
-form .form_inner{
+.form_inner{
     position: relative;
     display: block;
     text-align: center;
@@ -46,20 +32,14 @@ form .form_inner{
     z-index: 2;
 }
 
-form .form_inner h2{
-    color: rgb(36, 36, 36);
-    font-size: 28px;
-    font-weight: 500;
-}
-
-form .form_inner .form_group{
+.form_group{
     display: block;
     text-align: left;
     width: 300px;
     margin-bottom: 15px;
 }
 
-.form_inner .form_group label{
+.form_label {
     display: block;
     color: #838383;
     font-size: 12px;
@@ -67,24 +47,31 @@ form .form_inner .form_group{
     transition: 0.4s;
 }
 
-.form_inner .form_group:focus-within label{
-    color: #00f7ff;
-}
-
-form .form_inner .form_group input {
+.form_group input {
     display:block;
     width: 100%;
     padding: 10px 15px;
     background-color: #d8d8d8;
     border-radius: 8px;
     transition: 0.4s;
+    appearance: none;
+    border: none;
+    outline: none;
+}
+
+form .form_inner .form_group:focus-within label{
+    color: #00f7ff;
 }
 
 form .form_inner .form_group input:focus{
     box-shadow: 0px 0px 3px #00f7ff;
 }
 
-form .form_inner .submitButton, .welcome .submitButton{
+form .form_inner .submitButton:hover, .welcome .submitButton:hover{
+    background-position: 100% 0%;
+}
+
+.submitButton {
     display: inline-block;
     margin: 10px 5px;
     padding: 10px 15px;
@@ -96,28 +83,7 @@ form .form_inner .submitButton, .welcome .submitButton{
     color: #fff;
     font-weight: 700;
     cursor: pointer;
+    appearance: none;
+    border: none;
 }
 
-form .form_inner .submitButton:hover, .welcome .submitButton:hover{
-    background-position: 100% 0%;
-}
-
-.welcome{
-    width:100%;
-    max-width: 480px;
-    background-color: #fff;
-    padding: 15px 30px;
-    text-align: center;
-}
-
-.welcome h2{
-    color: #888;
-    font-size: 28px;
-    font-weight: 500;
-    margin-bottom: 30px;
-}
-
-.welcome h2 span{
-    color: #58008b;
-    font-weight: 700;
-}

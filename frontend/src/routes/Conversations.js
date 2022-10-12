@@ -185,7 +185,9 @@ class Conversations extends React.Component {
                         })}
                     </div>
                     <div style={{width: "100%", padding: "5px"}}>
-                        <input className={styles.message_entry} placeholder="Enter a message" onSubmit={(res) => {console.log(res)}} />
+                        <form>
+                            <input className={styles.message_entry} placeholder="Enter a message" onSubmit={(res) => {console.log(res)}} />
+                        </form>
                     </div>
                 </div>
             </div>

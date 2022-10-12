@@ -20,20 +20,20 @@ function LoginForm({Login, Register, error}){
 
     return (
         <div>
-            <form>
+            <form className={styles.login_form}>
                     <div className={styles.form_inner}>
                         <h2>Login</h2>
                             {(error != "") ? (<div className="error">{error}</div>) : ""}
                         <div className={styles.form_group}> 
-                            <label htmlFor="name">Name:</label>
+                            <label className={styles.form_label} htmlFor="name">Name:</label>
                             <input type="text" name="name" id="name" onChange={e => setDetails({...details, name: e.target.value})} value={details.name}/>
                         </div>
                         <div className={styles.form_group}>
-                            <label htmlFor="email">Email:</label>
+                            <label className={styles.form_label} htmlFor="email">Email:</label>
                             <input type="email" name="email" id="email" onChange={e => setDetails({...details, email: e.target.value})} value={details.email}/>
                         </div>
                         <div className={styles.form_group}>
-                            <label htmlFor="password">Password:</label>
+                            <label className={styles.form_label} htmlFor="password">Password:</label>
                             <input type="password" name="password" id="password" onChange={e => setDetails({...details, password: e.target.value})} value={details.password}/>
                         </div>
                         <input type="submit" onClick={loginHandler} value="Login" className={styles.submitButton}/>
