@@ -18,6 +18,13 @@
   font: 16px;
 }
 
+.hide{
+  display:none;
+}
+.show{
+  display:block;
+}
+
 div.container {
   text-align: center;
 }
@@ -27,6 +34,23 @@ ul.myUL {
   text-align: left;
 }
 
+.small_circular_image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: blueviolet;
+  margin-right: 10px;
+  /* commented for demo
+  float: left;
+  margin-left: 125px;
+  margin-top: 20px;
+  */
+  
+  /*for demo*/
+  display:inline-block;
+  vertical-align:middle;
+}
 
 .circular_image {
   width: 200px;
