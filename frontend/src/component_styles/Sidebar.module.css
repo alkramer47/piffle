@@ -5,8 +5,7 @@ Sidebar styling
 .sidebar {
 	background: #c4c4c4;
 	height: 100%;
-	width: 20%;
-	min-width: 180px;
+	min-width: 20%;
 	padding: 10px;
 	overflow-y: auto;
   }
