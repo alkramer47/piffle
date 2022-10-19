@@ -18,7 +18,6 @@ class RegisterForm extends React.Component {
     }
 
     handleSubmit(event) {
-      const { name, password } = this.state
       alert('A name and password was submitted: ' + this.state.name + " " + this.state.password);
       event.preventDefault();
     }

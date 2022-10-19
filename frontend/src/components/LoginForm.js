@@ -23,7 +23,7 @@ function LoginForm({Login, Register, error}){
             <form className={styles.login_form}>
                     <div className={styles.form_inner}>
                         <h2>Login</h2>
-                            {(error != "") ? (<div className="error">{error}</div>) : ""}
+                            {(error !== "") ? (<div className="error">{error}</div>) : ""}
                         <div className={styles.form_group}> 
                             <label className={styles.form_label} htmlFor="name">Name:</label>
                             <input type="text" name="name" id="name" onChange={e => setDetails({...details, name: e.target.value})} value={details.name}/>

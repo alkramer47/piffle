@@ -159,7 +159,33 @@ class Conversations extends React.Component {
     }
 
     setSelected = (index) => {
-        this.setState({selectedConversation: index})
+        this.setState({selectedConversation: index, message: ""})
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+
+        let conversations = this.state.conversations
+        conversations[this.getSelected()].messages.push({
+            sender: "Frank",
+            receiver: conversations[this.getSelected()].receiver,
+            timestamp: 300,
+            text: this.state.message,
+            attachment: null
+        })
+        console.log(this.state.conversations[this.getSelected()].messages)
+
+
+        this.setState({
+            message: "",
+            conversations: conversations
+        })
     }
 
     render = () => {
@@ -185,8 +211,8 @@ class Conversations extends React.Component {
                         })}
                     </div>
                     <div style={{width: "100%", padding: "5px"}}>
-                        <form>
-                            <input className={styles.message_entry} placeholder="Enter a message" onSubmit={(res) => {console.log(res)}} />
+                        <form onSubmit={this.handleSubmit}>
+                            <input className={styles.message_entry} placeholder="Enter a message" name="message" autocomplete="off" onChange={this.handleChange} value={this.state.message}/>
                         </form>
                     </div>
                 </div>
