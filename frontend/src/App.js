@@ -14,6 +14,7 @@ import Template from "./routes/template";
 import Profile from './routes/accounts/profile';
 import Conversations from './routes/Conversations';
 import { ClassNames } from '@emotion/react';
+import Testing from './routes/Testing';
 
 class App extends Component {
     render() {
@@ -32,6 +33,7 @@ class App extends Component {
                             </Routes>
                         } />} />
                         {/* Paths here do not require login */}
+                        <Route path="/testing" element={<Testing />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/updatepassword" element={<UpdatePassword />} />
