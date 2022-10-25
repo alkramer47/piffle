@@ -7,10 +7,10 @@ const UpdatePassword = () => {
     return (
         <div>
             <form>
-      <label>Enter new password:
-        <input type="text" />
-      </label>
-    </form>
+                <label>Enter new password:
+                    <input type="text" />
+                 </label>
+            </form>
         </div>
     );
 }

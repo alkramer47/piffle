@@ -1,6 +1,9 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from "react-router-dom";
 import "../../App.css"
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const Profile = () => {
     const navigate = useNavigate();
@@ -17,7 +20,7 @@ const Profile = () => {
 
                     <Dropdown.Menu variant="dark">
                         <Dropdown.Item href="/UpdatePicture">Change profile picture</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">Change background</Dropdown.Item>
+                        <Dropdown.Item href="/UpdateBackground">Change background</Dropdown.Item>
                         <Dropdown.Item href="/UpdatePassword">Change password</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
@@ -38,8 +41,7 @@ const Profile = () => {
            <p>
            <img class="small_circular_image" src={require('../../assets/puffle_orange.png')} alt="orange_puffle" />
             turing</p> 
-           <button class="button" onClick={onButtonClick}>Add Friend</button>
-           
+           <AddFriend />
         </div>
 
         
@@ -48,9 +50,45 @@ const Profile = () => {
     );
 }
 
-function onButtonClick(){
-    document.getElementById('textInput').className="show";
-  }
+function AddFriend() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  return (
+    <>
+      <Button variant="primary" onClick={handleShow}>
+        Add Friend
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add friend</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <label>Enter the name of the friend you wish to add:
+                    <input type="text" />
+                 </label>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
+
+
+
+
+
+
 
   
 export default Profile;
