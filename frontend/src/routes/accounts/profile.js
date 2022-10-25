@@ -76,13 +76,44 @@ function AddFriend() {
             Close
           </Button>
           <Button variant="primary" onClick={handleClose}>
-            Save Changes
+            Add
           </Button>
         </Modal.Footer>
       </Modal>
     </>
   );
 }
+
+function ChangePicture() {
+    const [show, setShow] = useState(false);
+  
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+  
+    return (
+      <>
+        <Button variant="primary" onClick={handleShow}>
+          Add Friend
+        </Button>
+  
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Change Profile Picture</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
 
 
 

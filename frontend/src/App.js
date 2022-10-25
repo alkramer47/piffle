@@ -13,6 +13,10 @@ import Navbar from "./components/Navbar";
 import Template from "./routes/template";
 import Profile from './routes/accounts/profile';
 import Conversations from './routes/Conversations';
+import UpdateBackground from './routes/accounts/UpdateBackground';
+import UpdatePicture from './routes/accounts/UpdatePicture';
+
+
 import { ClassNames } from '@emotion/react';
 
 class App extends Component {
@@ -35,6 +39,9 @@ class App extends Component {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/updatepassword" element={<UpdatePassword />} />
+                        <Route path="/updatepicture" element={<UpdatePicture />} />
+                        <Route path="/updatebackground" element={<UpdateBackground />} />
+
                     </Routes>
                 </BrowserRouter>
             </div>
