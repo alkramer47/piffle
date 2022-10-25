@@ -16,9 +16,9 @@ const Profile = () => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu variant="dark">
-                        <Dropdown.Item href="#/action-1">Change profile picture</Dropdown.Item>
+                        <Dropdown.Item href="/UpdatePicture">Change profile picture</Dropdown.Item>
                         <Dropdown.Item href="#/action-2">Change background</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">Change password</Dropdown.Item>
+                        <Dropdown.Item href="/UpdatePassword">Change password</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </div>

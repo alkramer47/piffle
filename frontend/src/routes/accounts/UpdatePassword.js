@@ -6,7 +6,11 @@ const UpdatePassword = () => {
     
     return (
         <div>
-            TEMP UPDATE PASSWORD
+            <form>
+      <label>Enter new password:
+        <input type="text" />
+      </label>
+    </form>
         </div>
     );
 }
