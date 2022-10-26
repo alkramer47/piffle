@@ -212,7 +212,7 @@ class Conversations extends React.Component {
                     </div>
                     <div style={{width: "100%", padding: "5px"}}>
                         <form onSubmit={this.handleSubmit}>
-                            <input className={styles.message_entry} placeholder="Enter a message" name="message" autocomplete="off" onChange={this.handleChange} value={this.state.message}/>
+                            <input className={styles.message_entry} placeholder="Enter a message" name="message" autoComplete="off" onChange={this.handleChange} value={this.state.message}/>
                         </form>
                     </div>
                 </div>

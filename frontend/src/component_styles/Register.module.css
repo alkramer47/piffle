@@ -8,7 +8,6 @@
 .register_form{
     display: block;
     position: relative;
-    margin-bottom: 50%;
 }
 
 .register_form::after{

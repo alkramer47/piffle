@@ -41,7 +41,11 @@ const Navbar = () => {
         else navigate("/"); //Do not reload if we're on a different path because it causes an error with fetch
     }
 
+    //TODO Temp function to stand in for isLoggedIn function checking access token. Delete this function when isLoggedIn is implemented
+    const isLoggedIn = () => true;
+
     return (
+        isLoggedIn() ?
         <div
             className="appColor"
             style={{
@@ -58,7 +62,7 @@ const Navbar = () => {
                     marginLeft: "18px",
                     marginBottom: "10px"
                 }}>
-                <img src={Puffle} width="50" style={{}}/>
+                <img src={Puffle} width="50" alt=""/>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center'}}>
@@ -67,6 +71,7 @@ const Navbar = () => {
             </div>
 
         </div>
+        : ""
     );
 }
 

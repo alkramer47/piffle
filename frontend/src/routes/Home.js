@@ -19,7 +19,7 @@ const Home = () => {
         console.log(details);
 
         /* This is where we will handle User information with DB */
-        if(details.email == adminUser.email && details.password == adminUser.password){
+        if(details.email === adminUser.email && details.password === adminUser.password){
             console.log("Logged in");
             setUser({
                name: details.name,
@@ -44,7 +44,7 @@ const Home = () => {
 
     return (
         <div className={styles.Home}>
-            {(user.email != "") ? (
+            {(user.email !== "") ? (
                 <div className={styles.welcome}>
                     <h2>Welcome, <span>{user.name}</span></h2>
                     <button onClick={Logout} className={styles.submitButton}>Logout</button>
