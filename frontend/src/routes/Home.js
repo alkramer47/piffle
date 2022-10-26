@@ -28,13 +28,13 @@ const Home = () => {
             navigate("/Conversations");
         } else {
             console.log("Incorrect Username and/or Password");
-            setError("Incorrect Username and/or Password")
+            setError("Incorrect Username and/or Password");
         }
     }
 
     const Register = () => {
         console.log("REGISTERING");
-        navigate("/accounts/register");
+        navigate("/Register");
     }
 
     const Logout = () => {

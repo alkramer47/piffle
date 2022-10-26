@@ -8,7 +8,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import Home from "./routes/Home";
 import UpdatePassword from "./routes/accounts/UpdatePassword";
 import Login from "./components/LoginForm";
-import Register from "./routes/accounts/register";
+import Register from "./routes/accounts/Register";
 import Navbar from "./components/Navbar";
 import Template from "./routes/template";
 import Profile from './routes/accounts/profile';
