@@ -15,6 +15,10 @@ import Conversations from './routes/Conversations';
 import UpdateBackground from './routes/accounts/UpdateBackground';
 import UpdatePicture from './routes/accounts/UpdatePicture';
 
+import { initializeApp } from "firebase/app";
+import firebaseConfig from './firebaseConfig.js';
+
+initializeApp(firebaseConfig);
 
 class App extends Component {
     render() {
