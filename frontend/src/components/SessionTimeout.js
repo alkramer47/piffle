@@ -4,9 +4,8 @@ import React, {
     useCallback,
     useRef,
     Fragment,
+    useAuth
   } from 'react';
-  import moment from 'moment';
-  import { useAuth } from '../context';
   
   const SessionTimeout = () => {
     const [events, setEvents] = useState(['click', 'load', 'scroll']);
@@ -37,9 +36,9 @@ import React, {
         const maxTime = 2;
         const popTime = 1;
   
-        const diff = moment.duration(moment().diff(moment(timeString)));
-        const minPast = diff.minutes();
-        const leftSecond = 60 - diff.seconds();
+        const diff = Date.now() - Date(timeString);
+        const minPast = diff.getMinutes();
+        const leftSecond = 60 - diff.getSeconds();
   
         if (minPast === popTime) {
           setSecond(leftSecond);
@@ -61,7 +60,7 @@ import React, {
       clearInterval(warningInactiveInterval.current);
   
       if (isAuthenticated) {
-        timeStamp = moment();
+        timeStamp = Date.now();
         sessionStorage.setItem('lastTimeStamp', timeStamp);
       } else {
         clearInterval(warningInactiveInterval.current);
