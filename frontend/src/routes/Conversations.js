@@ -13,19 +13,21 @@ class Conversations extends React.Component {
     }
     
     componentDidMount = async () => {
-        this.getConversations();
+        this.updateConversations();
     }
 
-    getConversations = async () => {
-        //TODO Call backend to get actual conversations
-        console.log("HERe");
+    updateConversations = async () => {
         let conversations = await getConversations();
-        console.log(conversations);
         this.setState ({
             conversations: conversations,
             selectedConversation: 0
         });
+        console.log(conversations)
         return conversations;
+    }
+
+    getConversations = () => {
+        return this.state.conversations;
     }
 
     getSelected = () => {
@@ -69,7 +71,7 @@ class Conversations extends React.Component {
                     <Sidebar getConversations={this.getConversations} getSelected={this.getSelected} setSelected={this.setSelected}/>
                     <div className={styles.convo_window}>
                         <div className={styles.convo_header} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                            {"hello you should fix me"}
+                            {"TEMP CONVO NAME"}
                         </div>
                         <div style={{overflowY: "auto", height: "100%"}}>
                             {this.state.conversations[this.state.selectedConversation].messages.map((message, index) => {
@@ -94,7 +96,7 @@ class Conversations extends React.Component {
                 </div>
             );
         } else {
-            return "fixme"
+            return <div style={{alignContent: "center"}}>No Conversations</div>
         }
     }
 }

@@ -22,7 +22,7 @@ export default class Sidebar extends Component {
                                     backgroundColor: (index === selected ? "#a6a6a6" : "transparent")
                                 }}>
                                 <div style={{display: "inline-flex", width: "100%"}}>
-                                    <h4 style={{marginBottom: "0px", marginTop: "5px", width: "100%"}} >{conv.recipient.username}</h4>
+                                    <h4 style={{marginBottom: "0px", marginTop: "5px", width: "100%"}} >TEMP CONVO NAME</h4>
                                 </div>
                             </Button>
                             <br />
