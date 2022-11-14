@@ -16,10 +16,9 @@ export const isLoggedIn = () => {
 //Returns the access token if it is not expired, null otherwise
 function getToken() {
 	let token = JSON.parse(window.localStorage.getItem("token"));
-	if(token===null)
+	if(token===null || token.token===undefined)
 		throw new Error("User is not logged in");
-	
-	return JSON.parse(window.localStorage.getItem("token")).token;
+	return token.token;
 }
 
 function decodeToken() {
@@ -28,6 +27,7 @@ function decodeToken() {
         if(token) return JSON.parse(atob(token.split('.')[1]));
     } catch (e) {
         console.error(e);
+        throw new Error(e);
     }
     return null;
 }
@@ -67,12 +67,12 @@ export const login = async (username, password) => {
             password: password
         })
     })
-    .then(response => response.json())
+    .then(response => response.text())
     .then(data => {
 		if(data.error !== undefined) 
 			throw new Error(data.error);
         else {
-			window.localStorage.setItem("token", JSON.stringify({token: data.token}));
+			window.localStorage.setItem("token", JSON.stringify({token: data}));
             return {message: "User logged in"};
 		}
     });
@@ -116,7 +116,7 @@ export const logout = async () => {
             token: getToken()
         })
     })
-    .then(response => response.json())
+    .then(response => response.text())
     .then(data => {
 		if(data.error !== undefined) 
 			throw new Error(data.error);
@@ -126,4 +126,34 @@ export const logout = async () => {
             return {message: "User logged out"};
 		}
     });
+}
+
+//Gets the user's username
+export const getUsername = () => {
+    let decodedToken = decodeToken();
+    if(!decodedToken) throw new Error("Error decoding token");
+
+    return decodedToken.username;
+}
+
+//Gets the conversations of the user signed in
+export const getConversations = async () => {
+    let token = getToken();
+    let decodedToken = decodeToken();
+    if(!decodedToken) throw new Error("Error decoding token");
+
+    return fetch(backendURL + "/get_conversations", {
+        method: "GET",
+        headers: {
+            "token": token
+        }
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        if(data.error !== undefined)
+            throw new Error(data.error);
+        else {
+            return data;
+        }
+    })
 }

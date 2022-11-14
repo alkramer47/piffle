@@ -17,6 +17,7 @@ import UpdatePicture from './routes/accounts/UpdatePicture';
 
 import { initializeApp } from "firebase/app";
 import firebaseConfig from './firebaseConfig.js';
+import Testing from './routes/Testing';
 
 initializeApp(firebaseConfig);
 
@@ -37,6 +38,7 @@ class App extends Component {
                         } />} />
                         {/* Paths here do not require login */}
                         <Route path="/" element={<Home />} />
+                        <Route path="/testing" element={<Testing />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/updatepassword" element={<UpdatePassword />} />
                         <Route path="/updatepicture" element={<UpdatePicture />} />
