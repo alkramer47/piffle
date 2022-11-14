@@ -19,7 +19,6 @@ class Testing extends React.Component {
 	render = () => {
 		return (
 			<div>
-				{getUsername()}
 				<Button variant="success" onClick={this.login}>Login</Button>
 				<Button variant="danger" onClick={this.logout}>Logout</Button>
 				<Button variant="primary" onClick={this.getConversations}>Get Conversations</Button>
