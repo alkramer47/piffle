@@ -7,7 +7,8 @@ class Conversations extends React.Component {
     constructor() {
         super()
         this.state = {
-            conversations: [],
+            message: "",
+            conversations: null,
             selectedConversation: -1
         }   
     }
@@ -16,14 +17,21 @@ class Conversations extends React.Component {
         this.updateConversations();
     }
 
+    //Updates the state with what is currently stored in backend's conversations
     updateConversations = async () => {
-        let conversations = await getConversations();
-        this.setState ({
-            conversations: conversations,
-            selectedConversation: 0
-        });
-        console.log(conversations)
-        return conversations;
+        let conversations;
+        try {
+            //Calling the backend for the user's conversations
+            conversations = await getConversations();
+            this.setState ({
+                conversations: conversations,
+                selectedConversation: 0
+            });
+            return conversations;
+        } catch(error) {
+            alert(error);
+        }
+        return -1;
     }
 
     getConversations = () => {
@@ -38,26 +46,28 @@ class Conversations extends React.Component {
         this.setState({selectedConversation: index, message: ""})
     }
 
+    //Handles changes to form fields by setting state to new values
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
+    //Submitting new message
     handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault() //Prevents refresh
+        //TODO call backend to post new message
 
+        //Updating the react component with the sent message
         let conversations = this.state.conversations
         conversations[this.getSelected()].messages.push({
-            sender: "Frank",
-            receiver: conversations[this.getSelected()].receiver,
-            timestamp: 300,
+            sender: getUsername(),
+            timestamp: Date.now(),
             text: this.state.message,
             attachment: null
         })
-        console.log(this.state.conversations[this.getSelected()].messages)
 
-
+        //Emptying the message field and updating conversation state
         this.setState({
             message: "",
             conversations: conversations
@@ -65,7 +75,7 @@ class Conversations extends React.Component {
     }
 
     render = () => {
-        if (this.state.selectedConversation != -1) {
+        if (this.state.conversations !== null) {
         return (
                 <div style={{height: '100%', display: 'flex', overflow: "hidden"}}>
                     <Sidebar getConversations={this.getConversations} getSelected={this.getSelected} setSelected={this.setSelected}/>
@@ -77,11 +87,11 @@ class Conversations extends React.Component {
                             {this.state.conversations[this.state.selectedConversation].messages.map((message, index) => {
                                 return (
                                     message.sender === getUsername() ? 
-                                    <div className={styles.message + ' ' + styles.receiver} key={index}>
+                                    <div className={styles.message + ' ' + styles.sender} key={index}>
                                         {message.text}
                                     </div>
                                     : 
-                                    <div className={styles.message + ' ' + styles.sender} key={index}>
+                                    <div className={styles.message + ' ' + styles.receiver} key={index}>
                                         {message.text}
                                     </div>
                                 )
@@ -96,7 +106,7 @@ class Conversations extends React.Component {
                 </div>
             );
         } else {
-            return <div style={{alignContent: "center"}}>No Conversations</div>
+            return <div style={{alignContent: "center"}}>Loading...</div>
         }
     }
 }

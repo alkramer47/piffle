@@ -1,15 +1,28 @@
 const backendURL = "http://127.0.0.1:5000"; //TODO update this with the actual backend URL
 const expireTime = 10800000; //3 hours until user is automatically logged out
 
+function handleErrors(response) {
+    if (!response.ok) {
+        if(response.status == 401) logout();
+        
+        throw Error(response.statusText);
+    }
+    return response;
+}
+
 //Returns true if user is logged in, false otherwise
 export const isLoggedIn = () => {
     try {
-        if(getToken()===null) return false;
+        let decoded = decodeToken();
+        if((new Date(decoded.expires)).getTime() < Date.now()) {
+            logout();
+            return false;
+        }
     }
     catch(error) {
+        console.error(error);
         return false;
     }
-
     return true;
 }
 
@@ -44,6 +57,7 @@ export const register = async (username, password) => {
             password: password
         })
     })
+    .then(handleErrors)
     .then(response => response.json())
     .then(data => {
 		if(data.error !== undefined) 
@@ -52,6 +66,9 @@ export const register = async (username, password) => {
 			window.localStorage.setItem("token", JSON.stringify({token: data.token}));
             return {message: "User has registered"};
         }
+    })
+    .catch((error) => {
+        alert(error);
     });
 }
 
@@ -67,6 +84,7 @@ export const login = async (username, password) => {
             password: password
         })
     })
+    .then(handleErrors)
     .then(response => response.text())
     .then(data => {
 		if(data.error !== undefined) 
@@ -75,6 +93,9 @@ export const login = async (username, password) => {
 			window.localStorage.setItem("token", JSON.stringify({token: data}));
             return {message: "User logged in"};
 		}
+    })
+    .catch((error) => {
+        alert(error);
     });
 }
 
@@ -96,6 +117,7 @@ export const updatePassword = async (password, newPassword) => {
             "newpassword": newPassword
         })
     })
+    .then(handleErrors)
     .then((response) => response.json())
     .then((data) => {
         if(data.error !== undefined)
@@ -103,6 +125,9 @@ export const updatePassword = async (password, newPassword) => {
         else 
             return data;
     })
+    .catch((error) => {
+        alert(error);
+    });
 }
 
 //Logs the user out
@@ -116,6 +141,7 @@ export const logout = async () => {
             token: getToken()
         })
     })
+    .then(handleErrors)
     .then(response => response.text())
     .then(data => {
 		if(data.error !== undefined) 
@@ -125,6 +151,9 @@ export const logout = async () => {
             document.location.reload();
             return {message: "User logged out"};
 		}
+    })
+    .catch((error) => {
+        alert(error);
     });
 }
 
@@ -139,8 +168,6 @@ export const getUsername = () => {
 //Gets the conversations of the user signed in
 export const getConversations = async () => {
     let token = getToken();
-    let decodedToken = decodeToken();
-    if(!decodedToken) throw new Error("Error decoding token");
 
     return fetch(backendURL + "/get_conversations", {
         method: "GET",
@@ -148,12 +175,17 @@ export const getConversations = async () => {
             "token": token
         }
     })
-    .then((response) => response.json())
+    .then(handleErrors)
+    .then(response => response.json())
     .then((data) => {
-        if(data.error !== undefined)
+        if(data.error !== undefined){
             throw new Error(data.error);
+        }
         else {
             return data;
         }
+    })
+    .catch((error) => {
+        alert(error);
     })
 }
