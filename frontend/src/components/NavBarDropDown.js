@@ -7,7 +7,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const ITEM_HEIGHT = 48;
 
-export default function LongMenu({ options = []}) {
+export default function LongMenu({ options = [], style}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -18,7 +18,7 @@ export default function LongMenu({ options = []}) {
     };
 
     return (
-        <div>
+        <div style={style}>
             <IconButton
                 aria-label="more"
                 id="long-button"

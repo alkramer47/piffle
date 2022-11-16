@@ -1,5 +1,4 @@
 const backendURL = "http://127.0.0.1:5000"; //TODO update this with the actual backend URL
-const expireTime = 10800000; //3 hours until user is automatically logged out
 
 function handleErrors(response) {
     if (!response.ok) {

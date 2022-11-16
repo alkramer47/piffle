@@ -18,5 +18,7 @@ Sidebar styling
 	border-color: transparent !important;
 	box-shadow: none !important;
 	padding: 0px;
+	display: inline-flex;
+	align-items: center;
   }
   

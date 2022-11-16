@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import NavBarDropDown from './NavBarDropDown';
 import styles from '../component_styles/Sidebar.module.css';
 
 export default class Sidebar extends Component {
+
+    options = [
+        {
+            label: "Add User",
+            onClick: () => { this.props.togglers.add() }
+        },
+        {
+            label: "Remove User",
+            onClick: () => { this.props.togglers.remove() }
+        }
+    ];
 
 	handleConversationSelect = (index) => {
 		this.props.setSelected(index)
@@ -22,8 +34,9 @@ export default class Sidebar extends Component {
                                     backgroundColor: (index === selected ? "#a6a6a6" : "transparent")
                                 }}>
                                 <div style={{display: "inline-flex", width: "100%"}}>
-                                    <h4 style={{marginBottom: "0px", marginTop: "5px", width: "100%"}} >TEMP CONVO NAME</h4>
+                                    <h5 style={{marginBottom: "0px", marginTop: "5px", width: "100%"}} >{conv.title}</h5>
                                 </div>
+                                <NavBarDropDown options={this.options} onClick={() => this.handleConversationSelect(index)}/>
                             </Button>
                             <br />
                         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
+import ConversationModals from "../components/ConversationModals";
 import styles from "../component_styles/Conversations.module.css"
 import { getConversations, getUsername } from "../Backend.js"
 
@@ -7,6 +8,8 @@ class Conversations extends React.Component {
     constructor() {
         super()
         this.state = {
+            showAdd: false,
+            showRemove: false,
             message: "",
             conversations: null,
             selectedConversation: -1
@@ -74,17 +77,32 @@ class Conversations extends React.Component {
         })
     }
 
+    toggleAddModal = () => {this.setState((prevState) => {return {showAdd: !prevState.showAdd}})}
+    toggleRemoveModal = () => {this.setState((prevState) => {return {showRemove: !prevState.showRemove}})}
+
+    addUser = (conversationID, username) => {
+        //TODO Implement this
+        console.log(conversationID, username)
+    }
+    removeUser = (conversationID, username) => {
+        //TODO Implement this
+        console.log(conversationID, username)
+    }
+
     render = () => {
         if (this.state.conversations !== null) {
+            let selectedConversation = this.state.conversations[this.state.selectedConversation];
         return (
+            <React.Fragment>
+                <ConversationModals conversation={this.state.conversations[this.state.selectedConversation]} functions={{add: this.addUser, remove: this.removeUser}} showers={{add: this.state.showAdd, remove: this.state.showRemove}} togglers={{add: this.toggleAddModal, remove: this.toggleRemoveModal}} />
                 <div style={{height: '100%', display: 'flex', overflow: "hidden"}}>
-                    <Sidebar getConversations={this.getConversations} getSelected={this.getSelected} setSelected={this.setSelected}/>
+                    <Sidebar getConversations={this.getConversations} getSelected={this.getSelected} setSelected={this.setSelected} togglers={{add: this.toggleAddModal, remove: this.toggleRemoveModal}}/>
                     <div className={styles.convo_window}>
                         <div className={styles.convo_header} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                            {"TEMP CONVO NAME"}
+                            {selectedConversation.title}
                         </div>
                         <div style={{overflowY: "auto", height: "100%"}}>
-                            {this.state.conversations[this.state.selectedConversation].messages.map((message, index) => {
+                            {selectedConversation.messages.map((message, index) => {
                                 return (
                                     message.sender === getUsername() ? 
                                     <div className={styles.message + ' ' + styles.sender} key={index}>
@@ -104,9 +122,10 @@ class Conversations extends React.Component {
                         </div>
                     </div>
                 </div>
-            );
+            </React.Fragment>
+        );
         } else {
-            return <div style={{alignContent: "center"}}>Loading...</div>
+            return <div style={{alignSelf: "center"}}>Loading...</div>
         }
     }
 }
