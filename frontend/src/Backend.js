@@ -12,7 +12,6 @@ function handleAPIErrors(response) {
             document.location.reload(); //Reload page
         }
         
-        console.warn(response);
         throw Error(response.statusText);
     }
     return response;
@@ -20,7 +19,7 @@ function handleAPIErrors(response) {
 
 function handleFetchErrors(error) {
     if(error.name === "TypeError") console.error(error);
-    else handleFetchErrors(error);
+    else alert(error);
 }
 
 //Returns true if user is logged in, false otherwise. Does not know whether token is expired. When token is expired, handleAPIErrors should automatically redirect
