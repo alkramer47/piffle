@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { Navbar } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import { isLoggedIn, logout } from '../Backend';
 
@@ -7,7 +8,6 @@ const PrivateRoute = (props) => {
 	let nav = useNavigate()	
 	useEffect(() => {
 		if (!isLoggedIn()) {
-			logout();
 			nav("/");
 		}
 	});

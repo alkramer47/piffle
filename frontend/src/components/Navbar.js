@@ -23,13 +23,15 @@ const Navbar = () => {
         options = []
     }
 
-    const goHome = () => { 
-        //Reload page if we're already at "/"
-        if(document.location.pathname === "/") {
-            navigate("/");
+    const clickLogo = () => {
+        let destination = isLoggedIn() ? "/conversations" : "/";
+
+        //Reload page if we're already there
+        if(document.location.pathname === destination) {
+            navigate(destination);
             navigate(0);
         }
-        else navigate("/"); //Do not reload if we're on a different path because it causes an error with fetch
+        else navigate(destination); //Do not reload if we're on a different path because it causes an error with fetch
     }
 
     return (
@@ -41,7 +43,7 @@ const Navbar = () => {
                 alignItems: "center",
                 justifyContent: 'space-between'
             }}>
-            <div onClick={goHome} 
+            <div onClick={clickLogo} 
                 style={{
                     display: "flex", 
                     flexDirection: "column", 

@@ -29,7 +29,7 @@ export default class Sidebar extends Component {
                 {conversations ? conversations.map((conv, index) => { 
                     return (
                         <div key={index}>
-                            <Button className={styles.sidebar_item} onClick={() => this.handleConversationSelect(index)} 
+                            <div className={styles.sidebar_item} onClick={() => this.handleConversationSelect(index)} 
                                 style={{
                                     backgroundColor: (index === selected ? "#a6a6a6" : "transparent")
                                 }}>
@@ -37,7 +37,7 @@ export default class Sidebar extends Component {
                                     <h5 style={{marginBottom: "0px", marginTop: "5px", width: "100%"}} >{conv.title}</h5>
                                 </div>
                                 <NavBarDropDown options={this.options} onClick={() => this.handleConversationSelect(index)}/>
-                            </Button>
+                            </div>
                             <br />
                         </div>
                     )

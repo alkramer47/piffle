@@ -12,6 +12,7 @@ Sidebar styling
   
   .sidebar_item {
 	width: 100%;
+	border-radius: 5px;
 	text-align: left;
 	color: black !important;
 	background-color: transparent;
@@ -20,5 +21,8 @@ Sidebar styling
 	padding: 0px;
 	display: inline-flex;
 	align-items: center;
+  }
+  .sidebar_item:hover {
+	cursor: pointer;
   }
   

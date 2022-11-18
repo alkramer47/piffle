@@ -1,25 +1,35 @@
 const backendURL = "http://127.0.0.1:5000"; //TODO update this with the actual backend URL
 
-function handleErrors(response) {
+function handleAPIErrors(response) {
     if (!response.ok) {
-        if(response.status == 401) logout();
+        if(response.status === 401) {
+            try {
+                window.localStorage.removeItem("token");
+            }
+            catch (error) {
+                //No token to remove, user's already logged out
+            }
+            document.location.reload(); //Reload page
+        }
         
+        console.warn(response);
         throw Error(response.statusText);
     }
     return response;
 }
 
-//Returns true if user is logged in, false otherwise
+function handleFetchErrors(error) {
+    if(error.name === "TypeError") console.error(error);
+    else handleFetchErrors(error);
+}
+
+//Returns true if user is logged in, false otherwise. Does not know whether token is expired. When token is expired, handleAPIErrors should automatically redirect
 export const isLoggedIn = () => {
     try {
-        let decoded = decodeToken();
-        if((new Date(decoded.expires)).getTime() < Date.now()) {
-            logout();
-            return false;
-        }
+        //Failure to get token means not logged in
+        getToken()
     }
     catch(error) {
-        console.error(error);
         return false;
     }
     return true;
@@ -56,7 +66,7 @@ export const register = async (username, password) => {
             password: password
         })
     })
-    .then(handleErrors)
+    .then(handleAPIErrors)
     .then(response => response.json())
     .then(data => {
 		if(data.error !== undefined) 
@@ -67,7 +77,7 @@ export const register = async (username, password) => {
         }
     })
     .catch((error) => {
-        alert(error);
+        handleFetchErrors(error);
     });
 }
 
@@ -83,7 +93,7 @@ export const login = async (username, password) => {
             password: password
         })
     })
-    .then(handleErrors)
+    .then(handleAPIErrors)
     .then(response => response.text())
     .then(data => {
 		if(data.error !== undefined) 
@@ -94,7 +104,7 @@ export const login = async (username, password) => {
 		}
     })
     .catch((error) => {
-        alert(error);
+        handleFetchErrors(error);
     });
 }
 
@@ -116,7 +126,7 @@ export const updatePassword = async (password, newPassword) => {
             "newpassword": newPassword
         })
     })
-    .then(handleErrors)
+    .then(handleAPIErrors)
     .then((response) => response.json())
     .then((data) => {
         if(data.error !== undefined)
@@ -125,22 +135,26 @@ export const updatePassword = async (password, newPassword) => {
             return data;
     })
     .catch((error) => {
-        alert(error);
+        handleFetchErrors(error);
     });
 }
 
 //Logs the user out
 export const logout = async () => {
-    return fetch(backendURL + "/logout", {
+    try {
+        var token = getToken();
+    }
+    catch (error) {
+        //User's not logged in so no need to log out
+        return {message: "There is no user logged in"};
+    }
+    return await fetch(backendURL + "/logout", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            token: getToken()
-        })
+            "token": token
+        }
     })
-    .then(handleErrors)
+    .then(handleAPIErrors)
     .then(response => response.text())
     .then(data => {
 		if(data.error !== undefined) 
@@ -152,7 +166,7 @@ export const logout = async () => {
 		}
     })
     .catch((error) => {
-        alert(error);
+        handleFetchErrors(error);
     });
 }
 
@@ -174,7 +188,7 @@ export const getConversations = async () => {
             "token": token
         }
     })
-    .then(handleErrors)
+    .then(handleAPIErrors)
     .then(response => response.json())
     .then((data) => {
         if(data.error !== undefined){
@@ -185,6 +199,6 @@ export const getConversations = async () => {
         }
     })
     .catch((error) => {
-        alert(error);
+        handleFetchErrors(error);
     })
 }
