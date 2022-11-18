@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
 import NavBarDropDown from './NavBarDropDown';
 import styles from '../component_styles/Sidebar.module.css';
 
@@ -13,6 +12,10 @@ export default class Sidebar extends Component {
         {
             label: "Remove User",
             onClick: () => { this.props.togglers.remove() }
+        },
+        {
+            label: "Leave Conversation",
+            onClick: () => { this.props.leaveConversation() }
         }
     ];
 

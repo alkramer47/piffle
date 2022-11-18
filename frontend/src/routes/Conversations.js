@@ -13,7 +13,7 @@ class Conversations extends React.Component {
             message: "",
             conversations: null,
             selectedConversation: -1
-        }   
+        }
     }
     
     componentDidMount = async () => {
@@ -82,11 +82,15 @@ class Conversations extends React.Component {
 
     addUser = (conversationID, username) => {
         //TODO Implement this
-        console.log(conversationID, username)
+        console.log("Add user", conversationID, username);
     }
     removeUser = (conversationID, username) => {
         //TODO Implement this
-        console.log(conversationID, username)
+        console.log("Remove user", conversationID, username);
+    }
+    leaveConversation = (conversationID=this.state.conversations[this.state.selectedConversation]._id["$oid"]) => {
+        //TODO Implement this (just do removeUser but with getUsername())
+        console.log("Leave conversation", conversationID, getUsername());
     }
 
     render = () => {
@@ -96,7 +100,7 @@ class Conversations extends React.Component {
             <React.Fragment>
                 <ConversationModals conversation={this.state.conversations[this.state.selectedConversation]} functions={{add: this.addUser, remove: this.removeUser}} showers={{add: this.state.showAdd, remove: this.state.showRemove}} togglers={{add: this.toggleAddModal, remove: this.toggleRemoveModal}} />
                 <div style={{height: '100%', display: 'flex', overflow: "hidden"}}>
-                    <Sidebar getConversations={this.getConversations} getSelected={this.getSelected} setSelected={this.setSelected} togglers={{add: this.toggleAddModal, remove: this.toggleRemoveModal}}/>
+                    <Sidebar getConversations={this.getConversations} getSelected={this.getSelected} setSelected={this.setSelected} togglers={{add: this.toggleAddModal, remove: this.toggleRemoveModal}} leaveConversation={this.leaveConversation}/>
                     <div className={styles.convo_window}>
                         <div className={styles.convo_header} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                             {selectedConversation.title}
