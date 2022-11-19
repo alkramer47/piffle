@@ -18,8 +18,8 @@ function handleAPIErrors(response) {
 }
 
 function handleFetchErrors(error) {
-    if(error.name === "TypeError") console.error(error);
-    else alert(error);
+    console.error(error);
+    if(error.name !== "TypeError") alert(error);
 }
 
 //Returns true if user is logged in, false otherwise. Does not know whether token is expired. When token is expired, handleAPIErrors should automatically redirect
@@ -195,6 +195,73 @@ export const getConversations = async () => {
         }
         else {
             return data;
+        }
+    })
+    .catch((error) => {
+        handleFetchErrors(error);
+    });
+}
+
+export const addFriend = async (username) => {
+    let token = getToken();
+
+    return await fetch(backendURL + "/friend_request/" + username, {
+        method: "POST",
+        headers: {
+            "token": token
+        }
+    })
+    .then(handleAPIErrors)
+    .then(response => response.text())
+    .then((data) => {
+        if(data.error !== undefined){
+            throw new Error(data.error);
+        }
+        else {
+            return data;
+        }
+    })
+    .catch((error) => {
+        handleFetchErrors(error);
+    });
+}
+
+export const removeFriend = async (username) => {
+    let token = getToken();
+
+    return await fetch(backendURL + "/remove_friend/" + username, {
+        method: "POST",
+        headers: {
+            "token": token
+        }
+    })
+    .then(handleAPIErrors)
+    .then(response => response.text())
+    .then((data) => {
+        if(data.error !== undefined){
+            throw new Error(data.error);
+        }
+        else {
+            return data;
+        }
+    })
+    .catch((error) => {
+        handleFetchErrors(error);
+    });
+}
+
+export const getFriendsList = async (username) => {
+    return await fetch(backendURL + "/get_friends_list/" + username, {
+        method: "GET"
+    })
+    .then(handleAPIErrors)
+    .then(response => response.json())
+    .then((data) => {
+        if(data.error !== undefined){
+            throw new Error(data.error);
+        }
+        else {
+            return data.friends_list;
         }
     })
     .catch((error) => {
