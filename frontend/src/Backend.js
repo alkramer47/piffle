@@ -268,3 +268,51 @@ export const getFriendsList = async (username) => {
         handleFetchErrors(error);
     })
 }
+
+export const getUserSettings = async (username) => {
+    return await fetch(backendURL + "/users/settings/get/" + username, {
+        method: "GET"
+    })
+    .then(handleAPIErrors)
+    .then(response => response.json())
+    .then((data) => {
+        if(data.error !== undefined){
+            throw new Error(data.error);
+        }
+        else {
+            return data.profile;
+        }
+    })
+    .catch((error) => {
+        handleFetchErrors(error);
+    })
+}
+
+export const setUserSettings = async (settings) => {
+    let token = getToken();
+
+    return await fetch(backendURL + "/users/settings/set", {
+        method: "POST",
+        headers: {
+            "token": token,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "username": getUsername(),
+            "profile": settings
+        })
+    })
+    .then(handleAPIErrors)
+    .then(response => response.text())
+    .then((data) => {
+        if(data.error !== undefined){
+            throw new Error(data.error);
+        }
+        else {
+            return data;
+        }
+    })
+    .catch((error) => {
+        handleFetchErrors(error);
+    });
+}
