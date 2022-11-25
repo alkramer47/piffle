@@ -2,7 +2,7 @@ import React from "react";
 import Sidebar from "../components/Sidebar";
 import ConversationModals from "../components/ConversationModals";
 import styles from "../component_styles/Conversations.module.css"
-import { getConversations, getUsername } from "../Backend.js"
+import { getConversations, getUsername, addConversationUser, removeConversationUser } from "../Backend.js"
 
 class Conversations extends React.Component {
     constructor() {
@@ -83,14 +83,17 @@ class Conversations extends React.Component {
     addUser = (conversationID, username) => {
         //TODO Implement this
         console.log("Add user", conversationID, username);
+        addConversationUser(username, conversationID);
     }
     removeUser = (conversationID, username) => {
         //TODO Implement this
         console.log("Remove user", conversationID, username);
+        removeConversationUser(username, conversationID);
     }
     leaveConversation = (conversationID=this.state.conversations[this.state.selectedConversation]._id["$oid"]) => {
         //TODO Implement this (just do removeUser but with getUsername())
         console.log("Leave conversation", conversationID, getUsername());
+        removeConversationUser(getUsername(), conversationID);
     }
 
     render = () => {

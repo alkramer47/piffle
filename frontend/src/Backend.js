@@ -202,6 +202,56 @@ export const getConversations = async () => {
     });
 }
 
+export const addConversationUser = async (username, conversation_id) => {
+    let token = getToken();
+
+    return await fetch(backendURL + "/conversation_add_user", {
+        method: "POST",
+        headers: {
+            "username": username,
+            "conversation_id": conversation_id
+        }
+    })
+    .then(handleAPIErrors)
+    .then(response => response.text())
+    .then((data) => {
+        if(data.error !== undefined){
+            throw new Error(data.error);
+        }
+        else {
+            return data;
+        }
+    })
+    .catch((error) => {
+        handleFetchErrors(error);
+    });
+}
+
+export const removeConversationUser = async (username, conversation_id) => {
+    let token = getToken();
+
+    return await fetch(backendURL + "/conversation_remove_user", {
+        method: "POST",
+        headers: {
+            "username": username,
+            "conversation_id": conversation_id
+        }
+    })
+    .then(handleAPIErrors)
+    .then(response => response.text())
+    .then((data) => {
+        if(data.error !== undefined){
+            throw new Error(data.error);
+        }
+        else {
+            return data;
+        }
+    })
+    .catch((error) => {
+        handleFetchErrors(error);
+    });
+}
+
 export const addFriend = async (username) => {
     let token = getToken();
 
