@@ -2,7 +2,7 @@ import React from "react";
 import Sidebar from "../components/Sidebar";
 import ConversationModals from "../components/ConversationModals";
 import styles from "../component_styles/Conversations.module.css"
-import { getConversations, getUsername, addConversationUser, removeConversationUser } from "../Backend.js"
+import { getConversations, getUsername, addConversationUser, removeConversationUser, postConversationMessage } from "../Backend.js"
 
 class Conversations extends React.Component {
     constructor() {
@@ -59,7 +59,13 @@ class Conversations extends React.Component {
     //Submitting new message
     handleSubmit = (e) => {
         e.preventDefault() //Prevents refresh
+        let message = {
+            "sender": `${getUsername()}`,
+            "text": `${this.state.message}`,
+            "timestamp": `${Date.now()}`
+        };
         //TODO call backend to post new message
+        postConversationMessage(message, this.state.conversations[this.state.selectedConversation]._id.$oid);
 
         //Updating the react component with the sent message
         let conversations = this.state.conversations
@@ -83,17 +89,17 @@ class Conversations extends React.Component {
     addUser = (conversationID, username) => {
         //TODO Implement this
         console.log("Add user", conversationID, username);
-        addConversationUser(username, conversationID);
+        console.log(addConversationUser(username, conversationID));
     }
     removeUser = (conversationID, username) => {
         //TODO Implement this
         console.log("Remove user", conversationID, username);
-        removeConversationUser(username, conversationID);
+        console.log(removeConversationUser(username, conversationID));
     }
     leaveConversation = (conversationID=this.state.conversations[this.state.selectedConversation]._id["$oid"]) => {
         //TODO Implement this (just do removeUser but with getUsername())
         console.log("Leave conversation", conversationID, getUsername());
-        removeConversationUser(getUsername(), conversationID);
+        console.log(removeConversationUser(getUsername(), conversationID));
     }
 
     render = () => {
