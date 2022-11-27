@@ -12,12 +12,16 @@ class Conversations extends React.Component {
             showRemove: false,
             message: "",
             conversations: null,
-            selectedConversation: -1
+            selectedConversation: 0
         }
     }
     
     componentDidMount = async () => {
-        this.updateConversations();
+        this.interval = setInterval(() => this.updateConversations(), 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     //Updates the state with what is currently stored in backend's conversations
@@ -27,8 +31,7 @@ class Conversations extends React.Component {
             //Calling the backend for the user's conversations
             conversations = await getConversations();
             this.setState ({
-                conversations: conversations,
-                selectedConversation: 0
+                conversations: conversations
             });
             return conversations;
         } catch(error) {

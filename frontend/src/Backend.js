@@ -271,6 +271,29 @@ export const postConversationMessage = async (message, conversation_id) => {
     });
 }
 
+export const createConversation = async (users) => {
+    return await fetch(backendURL + "/create_conversation", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({"users": users}),
+    })
+    .then(handleAPIErrors)
+    .then(response => response.text())
+    .then((data) => {
+        if(data.error !== undefined){
+            throw new Error(data.error);
+        }
+        else {
+            return data;
+        }
+    })
+    .catch((error) => {
+        handleFetchErrors(error);
+    });
+}
+
 export const addFriend = async (username) => {
     let token = getToken();
 
