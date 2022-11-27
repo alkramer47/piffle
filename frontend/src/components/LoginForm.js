@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styles from '../component_styles/Home.module.css';
 
 function LoginForm({Login, Register, error}){
-    const[details, setDetails] = useState({name:"", email:"", password:""});
+    const[details, setDetails] = useState({username:"", password:""});
 
     /* Function to handle when Login button is clicked */
     const loginHandler = e => {
@@ -24,13 +24,9 @@ function LoginForm({Login, Register, error}){
                     <div className={styles.form_inner}>
                         <h2>Login</h2>
                             {(error !== "") ? (<div className="error">{error}</div>) : ""}
-                        <div className={styles.form_group}> 
-                            <label className={styles.form_label} htmlFor="name">Name:</label>
-                            <input type="text" name="name" id="name" onChange={e => setDetails({...details, name: e.target.value})} value={details.name}/>
-                        </div>
                         <div className={styles.form_group}>
-                            <label className={styles.form_label} htmlFor="email">Email:</label>
-                            <input type="email" name="email" id="email" onChange={e => setDetails({...details, email: e.target.value})} value={details.email}/>
+                            <label className={styles.form_label} htmlFor="username">Username:</label>
+                            <input type="username" name="username" id="username" onChange={e => setDetails({...details, username: e.target.value})} value={details.username}/>
                         </div>
                         <div className={styles.form_group}>
                             <label className={styles.form_label} htmlFor="password">Password:</label>

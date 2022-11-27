@@ -9,7 +9,7 @@ function handleAPIErrors(response) {
             catch (error) {
                 //No token to remove, user's already logged out
             }
-            document.location.reload(); //Reload page
+            //document.location.reload(); //Reload page
         }
         
         throw Error(response.statusText);
@@ -19,6 +19,7 @@ function handleAPIErrors(response) {
 
 function handleFetchErrors(error) {
     console.error(error);
+    throw new Error(error);
     if(error.name !== "TypeError") alert(error);
 }
 
@@ -80,6 +81,19 @@ export const register = async (username, password) => {
     });
 }
 
+export const verifyLogin = async (username, password) => {
+    return fetch(backendURL + "/verifyLogin"), {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username: username,
+            password: password
+        })
+    }
+}
+
 //Logs the user in with the provided email and password
 export const login = async (username, password) => {
     return fetch(backendURL + "/login", {
@@ -134,7 +148,8 @@ export const updatePassword = async (password, newPassword) => {
             return data;
     })
     .catch((error) => {
-        handleFetchErrors(error);
+        // handleFetchErrors(error);
+        throw new Error(error);
     });
 }
 
