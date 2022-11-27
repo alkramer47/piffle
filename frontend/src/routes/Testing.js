@@ -16,9 +16,10 @@ class Testing extends React.Component {
 	}
 
 	componentDidMount = async () => {
-		if(isLoggedIn())
+		if(isLoggedIn()) {
 			await this.updateUserSettings();
 			await this.updateFriendsList();
+		}
 	}
 
 	login = async () => {
