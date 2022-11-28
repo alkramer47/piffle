@@ -8,20 +8,7 @@ const Register = () => {
     const navigate = useNavigate();
     const [error, setError] = useState([""]);
 
-    /* This function is where we will handle backend for creating an account */
-    const createAccount = details => {
-        
-        // if(details.name != "" && details.email != "" && details.password == details.confirmPass){
-        //     console.log("Valid Registration Information");
-        //     setUser({
-        //         name: details.name,
-        //         email: details.email
-        //     });
-        //     navigate("/Conversations");
-        // } else{
-        //     setError("Registration invalid");
-        // }
-
+    const createAccount = async details => {
         if(details.username === ""){
             setError("Please enter your name");
         } else if (details.email === ""){
@@ -30,7 +17,12 @@ const Register = () => {
             setError("Please ensure both passwords match");
         }else{
             console.log("Valid Registration Information");
-            register(details.username, details.password)
+            try{
+                await register(details.username, details.password);
+            }catch(error){
+                console.log(error);
+            }
+            alert("Account Created Successfully!");
             navigate("/");
         }
     }
