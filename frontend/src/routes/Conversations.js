@@ -108,6 +108,7 @@ class Conversations extends React.Component {
     render = () => {
         if (this.state.conversations !== null) {
             let selectedConversation = this.state.conversations[this.state.selectedConversation];
+            if(this.state.conversations.length === 0) return <div>No conversations available</div>
         return (
             <React.Fragment>
                 <ConversationModals conversation={this.state.conversations[this.state.selectedConversation]} functions={{add: this.addUser, remove: this.removeUser}} showers={{add: this.state.showAdd, remove: this.state.showRemove}} togglers={{add: this.toggleAddModal, remove: this.toggleRemoveModal}} />

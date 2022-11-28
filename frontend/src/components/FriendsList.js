@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import { getFriendsList, getUsername } from "../Backend";
 import styles from "../component_styles/FriendsList.module.css"
 import { UserUtil } from "../util/ProfilePicture";
@@ -13,7 +13,8 @@ export default class FriendsList extends Component {
 						return (
 							<tr key={index}>
 								<td width="50px"><img className="small_circular_image" src={UserUtil.getProfilePicture(friend.profile.profile_image)} alt=""/></td>
-								<td style={{verticalAlign: "middle"}}>{friend.username}</td>
+								<td style={{verticalAlign: "middle", width: "50%"}}>{friend.username}</td>
+								<td width="150px"><Button variant="danger" onClick={() => this.props.removeFriend(friend.username)}>Remove friend</Button></td>
 							</tr>
 						)
 					})}

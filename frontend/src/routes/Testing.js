@@ -43,8 +43,8 @@ class Testing extends React.Component {
 		console.log(await addFriend("bender1"));
 	}
 
-	removeFriend = async () => {
-		console.log(await removeFriend("bender1"));
+	removeFriend = async (username) => {
+		console.log(await removeFriend(username));
 	}
 
 	setUserSettings = async (event) => {
@@ -94,7 +94,7 @@ class Testing extends React.Component {
 						<input type="number" name="profileIndex" min="1" max="6" placeholder="Enter a number" style={{minWidth: "200px", marginInline: "10px"}}/>
 					</form>
 					<br />
-					<FriendsList username={getUsername()} friendsList={this.state.friendsList} />
+					<FriendsList username={getUsername()} removeFriend={this.removeFriend} friendsList={this.state.friendsList} />
 				</div> : ""}
 				
 			</div>
