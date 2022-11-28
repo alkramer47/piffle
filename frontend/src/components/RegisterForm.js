@@ -74,7 +74,7 @@ class RegisterForm extends React.Component {
 */
 
 function RegisterForm({createAccount, error}){
-  const[details, setDetails] = useState({name:"", email:"", password:"", confirmPass:""});
+  const[details, setDetails] = useState({username:"", email:"", password:"", confirmPass:""});
 
   const registrationHandler = e => {
     e.preventDefault();
@@ -89,8 +89,8 @@ function RegisterForm({createAccount, error}){
                     <h2>Register an Account</h2>
                         {(error !== "") ? (<div className="error">{error}</div>) : ""}
                     <div className={styles.form_group}> 
-                        <label className={styles.form_label} htmlFor="name">Name:</label>
-                        <input type="text" name="name" id="name" onChange={e => setDetails({...details, name: e.target.value})} value={details.name}/>
+                        <label className={styles.form_label} htmlFor="username">Username:</label>
+                        <input type="text" name="username" id="username" onChange={e => setDetails({...details, username: e.target.value})} value={details.username}/>
                     </div>
                     <div className={styles.form_group}>
                         <label className={styles.form_label} htmlFor="email">Email:</label>

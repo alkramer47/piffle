@@ -19,8 +19,8 @@ function handleAPIErrors(response) {
 
 function handleFetchErrors(error) {
     console.error(error);
-    throw new Error(error);
     if(error.name !== "TypeError") alert(error);
+    throw new Error(error);
 }
 
 //Returns true if user is logged in, false otherwise. Does not know whether token is expired. When token is expired, handleAPIErrors should automatically redirect
@@ -79,19 +79,6 @@ export const register = async (username, password) => {
     .catch((error) => {
         handleFetchErrors(error);
     });
-}
-
-export const verifyLogin = async (username, password) => {
-    return fetch(backendURL + "/verifyLogin"), {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            username: username,
-            password: password
-        })
-    }
 }
 
 //Logs the user in with the provided email and password
