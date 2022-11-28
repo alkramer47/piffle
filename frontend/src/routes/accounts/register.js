@@ -31,7 +31,7 @@ const Register = () => {
         }else{
             console.log("Valid Registration Information");
             register(details.username, details.password)
-            navigate("/Home");
+            navigate("/");
         }
     }
     
