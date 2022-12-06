@@ -2,7 +2,7 @@ import React from "react";
 import Sidebar from "../components/Sidebar";
 import ConversationModals from "../components/ConversationModals";
 import styles from "../component_styles/Conversations.module.css"
-import { getConversations, getUsername, addConversationUser, removeConversationUser, postConversationMessage } from "../Backend.js"
+import { getConversations, getUsername, addConversationUser, removeConversationUser, postConversationMessage, logout } from "../Backend.js"
 
 class Conversations extends React.Component {
     constructor() {
@@ -43,6 +43,7 @@ class Conversations extends React.Component {
             if(error.message !== 'TypeError: Failed to fetch') {
                 alert(error);
             }
+            if(error.message === "Error: UNAUTHORIZED") logout();
         }
         return -1;
     }
