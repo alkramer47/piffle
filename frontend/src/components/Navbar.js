@@ -12,9 +12,9 @@ const Navbar = () => {
             label: "Profile",
             onClick: () => { navigate('/profile'); }
         }, {
-            label: "Update password",
-            onClick: () => { navigate('/updatepassword'); }
-        }, {
+        //     label: "Update password",
+        //     onClick: () => { navigate('/updatepassword'); }
+        // }, {
             label: "Logout",
             onClick: () => { logout().catch((error)=>alert(error)); navigate('/');}
         }];

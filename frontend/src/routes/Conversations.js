@@ -24,6 +24,10 @@ class Conversations extends React.Component {
         clearInterval(this.interval);
     }
 
+    scrollToBottom = () => {
+        this.el.scrollIntoView({behavior: "smooth"});
+    }
+
     //Updates the state with what is currently stored in backend's conversations
     updateConversations = async () => {
         let conversations;
@@ -32,10 +36,13 @@ class Conversations extends React.Component {
             conversations = await getConversations();
             this.setState ({
                 conversations: conversations
-            });
+            }, () => {this.scrollToBottom()});
             return conversations;
         } catch(error) {
-            alert(error);
+            console.log(error.message);
+            if(error.message !== 'TypeError: Failed to fetch') {
+                alert(error);
+            }
         }
         return -1;
     }
@@ -72,17 +79,17 @@ class Conversations extends React.Component {
 
         //Updating the react component with the sent message
         let conversations = this.state.conversations
-        conversations[this.getSelected()].messages.push({
-            sender: getUsername(),
-            timestamp: Date.now(),
-            text: this.state.message,
-            attachment: null
-        })
+        // conversations[this.getSelected()].messages.push({
+        //     sender: getUsername(),
+        //     timestamp: Date.now(),
+        //     text: this.state.message,
+        //     attachment: null
+        // })
 
         //Emptying the message field and updating conversation state
         this.setState({
             message: "",
-            conversations: conversations
+            //conversations: conversations
         })
     }
 
@@ -95,12 +102,10 @@ class Conversations extends React.Component {
         console.log(addConversationUser(username, conversationID));
     }
     removeUser = (conversationID, username) => {
-        //TODO Implement this
         console.log("Remove user", conversationID, username);
         console.log(removeConversationUser(username, conversationID));
     }
     leaveConversation = (conversationID=this.state.conversations[this.state.selectedConversation]._id["$oid"]) => {
-        //TODO Implement this (just do removeUser but with getUsername())
         console.log("Leave conversation", conversationID, getUsername());
         console.log(removeConversationUser(getUsername(), conversationID));
     }
@@ -118,7 +123,7 @@ class Conversations extends React.Component {
                         <div className={styles.convo_header} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                             {selectedConversation.title}
                         </div>
-                        <div style={{overflowY: "auto", height: "100%"}}>
+                        <div id="conversationsWindow" style={{overflowY: "auto", height: "100%"}}>
                             {selectedConversation.messages.map((message, index) => {
                                 return (
                                     message.sender === getUsername() ? 
@@ -131,6 +136,7 @@ class Conversations extends React.Component {
                                     </div>
                                 )
                             })}
+                            <div ref={el => { this.el = el; }} />
                         </div>
                         <div style={{width: "100%", padding: "5px"}}>
                             <form onSubmit={this.handleSubmit}>

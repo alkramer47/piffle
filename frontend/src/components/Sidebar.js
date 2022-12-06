@@ -34,7 +34,7 @@ export default class Sidebar extends Component {
                         <div key={index}>
                             <div className={styles.sidebar_item} onClick={() => this.handleConversationSelect(index)} 
                                 style={{
-                                    backgroundColor: (index === selected ? "#a6a6a6" : "transparent")
+                                    backgroundColor: (index === selected ? "#a6a6a6" : (conversations[index].messages.length === 0) ? "#32bbb0" : "transparent")
                                 }}>
                                 <div style={{display: "inline-flex", width: "100%"}}>
                                     <h5 style={{marginBottom: "0px", marginTop: "5px", width: "100%"}} >{conv.title}</h5>

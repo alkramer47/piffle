@@ -1,12 +1,16 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import LoginForm from '../components/LoginForm';
 import styles from '../component_styles/Home.module.css';
 import { useNavigate } from "react-router-dom";
-import {login} from '../Backend';
+import {isLoggedIn, login} from '../Backend';
 
 const Home = () => {
     const navigate = useNavigate();
     const [error, setError] = useState([""]);
+    
+    useEffect(() => {
+        if(isLoggedIn()) navigate("/conversations");
+    });
 
     const Login = async details => {
         console.log(details);

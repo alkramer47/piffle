@@ -19,7 +19,9 @@ function handleAPIErrors(response) {
 
 function handleFetchErrors(error) {
     console.error(error);
-    if(error.name !== "TypeError") alert(error);
+    if(error.message, error.message !== 'Failed to fetch') {
+        alert(error);
+    }
     throw new Error(error);
 }
 

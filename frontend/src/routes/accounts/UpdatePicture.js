@@ -1,33 +1,32 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { setUserSettings } from '../../Backend';
+import { UserUtil } from '../../util/ProfilePicture';
 
 const UpdatePicture = () => {
+    let nav = useNavigate();
     
     return (
         <div>
             Choose a picture to be your new profile picture
             <p></p>
-           <button onClick={changePicture}><img className="small_circular_image"  style={{}}src={require('../../assets/puffle_blue.png')} alt="blue_puffle" /></button>
 
-           <button onClick={changePicture}><img className="small_circular_image"  style={{}}src={require('../../assets/puffle_brown.png')} alt="brown_puffle" /></button>
-
-           <button onClick={changePicture}><img className="small_circular_image"  style={{}}src={require('../../assets/puffle_orange.png')} alt="orange_puffle" /></button>
-
-           <button onClick={changePicture}><img className="small_circular_image"  style={{}}src={require('../../assets/puffle_pink.png')} alt="pink_puffle" /></button>
-
-           <button onClick={changePicture}><img className="small_circular_image"  style={{}}src={require('../../assets/puffle_purple.png')} alt="purple_puffle" /></button>
-
-           <button onClick={changePicture}><img className="small_circular_image"  style={{}}src={require('../../assets/puffle_sleep.png')} alt="sleepy_puffle" /></button>
-
+            {[...Array(6).keys()].map((num, index) => {
+                return (
+                    <button onClick={changePicture} key={index} index={index}><img className="small_circular_image" src={UserUtil.getProfilePicture(index)} alt="" index={index}/></button>
+                )
+            })}
         </div>
     );
-}
 
-function changePicture(){
-    return (
-        console.log("clicked")
-    );
+    async function changePicture(event){
+        let settings = {
+            "profile_image": parseInt(event.target.getAttribute("index"))
+        }
+        console.log(await setUserSettings(settings));
+        nav("/profile");
+    }
 }
 
 
