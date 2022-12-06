@@ -36,7 +36,7 @@ class Conversations extends React.Component {
             conversations = await getConversations();
             this.setState ({
                 conversations: conversations
-            }, () => {this.scrollToBottom()});
+            }, () => {if(this.state.conversations.length > 0) this.scrollToBottom()});
             return conversations;
         } catch(error) {
             console.log(error.message);

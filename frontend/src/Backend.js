@@ -1,4 +1,4 @@
-const backendURL = "http://127.0.0.1:5000"; //TODO update this with the actual backend URL
+const backendURL = "https://nmtaylor.com:3070";
 
 function handleAPIErrors(response) {
     if (!response.ok) {
