@@ -99,8 +99,9 @@ function AddFriend() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleAdd = async (e) => {
-    console.log(e.target.username)
+    e.preventDefault();
     console.log(await addFriend(e.target.username.value));
+    window.location.reload();
   }
 
   return (
@@ -113,21 +114,21 @@ function AddFriend() {
         <Modal.Header closeButton>
           <Modal.Title>Add friend</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-            <label>Enter the name of the friend you wish to add:
-              <form onSubmit={(e) => {handleAdd(e); handleClose()}}>
+          <form onSubmit={(e) => {handleAdd(e); handleClose()}}>
+            <Modal.Body>
+              <label>Enter the name of the friend you wish to add:
                 <input type="text" name="username"/>
-              </form>
-            </label>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={(e) => {handleAdd(e); handleClose()}}>
-            Add
-          </Button>
-        </Modal.Footer>
+              </label>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            <Button variant="primary" type="submit" onClick={handleClose}>
+              Add
+            </Button>
+          </Modal.Footer>
+        </form>
       </Modal>
     </>
   );
