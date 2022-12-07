@@ -30,13 +30,14 @@ class Conversations extends React.Component {
 
     //Updates the state with what is currently stored in backend's conversations
     updateConversations = async () => {
+        let oldConversations = JSON.parse(JSON.stringify(this.state.conversations)); //deep copy
         let conversations;
         try {
             //Calling the backend for the user's conversations
             conversations = await getConversations();
             this.setState ({
                 conversations: conversations
-            }, () => {if(this.state.conversations.length > 0) this.scrollToBottom()});
+            }, () => {if(this.state.conversations.length > 0 && JSON.stringify(oldConversations) !== JSON.stringify(this.state.conversations)) this.scrollToBottom()});
             return conversations;
         } catch(error) {
             console.log(error.message);
