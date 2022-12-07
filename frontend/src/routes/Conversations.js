@@ -110,9 +110,11 @@ class Conversations extends React.Component {
         console.log("Remove user", conversationID, username);
         console.log(removeConversationUser(username, conversationID));
     }
-    leaveConversation = (conversationID=this.state.conversations[this.state.selectedConversation]._id["$oid"]) => {
+    leaveConversation = async (conversationID=this.state.conversations[this.state.selectedConversation]._id["$oid"]) => {
         console.log("Leave conversation", conversationID, getUsername());
-        console.log(removeConversationUser(getUsername(), conversationID));
+        console.log(await removeConversationUser(getUsername(), conversationID));
+        if(this.state.selectedConversation === this.state.conversations.length - 1)
+            this.setSelected(this.state.conversations.length - 2);
     }
 
     render = () => {
