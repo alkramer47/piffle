@@ -41,9 +41,12 @@ class Conversations extends React.Component {
         } catch(error) {
             console.log(error.message);
             if(error.message !== 'TypeError: Failed to fetch') {
-                alert(error);
+                if(error.message === "Error: UNAUTHORIZED" || error.message === "UNAUTHORIZED") {
+                    logout();
+                    window.location.reload();
+                }
+                else alert(error);
             }
-            if(error.message === "Error: UNAUTHORIZED") logout();
         }
         return -1;
     }
